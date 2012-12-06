@@ -18,7 +18,6 @@
 #define SERVO_INITIAL 127   // Replace with the servo's real initial position
 #define SERVO_RATE    1     // Larger = faster.  Be careful to give the servo time to move.
 #define FPS           60.0  // Rate at which loop repeats.  Also will affect speed of servo.
-
 #define TopHat_UP     0
 #define TopHat_DOWN   4
 
@@ -32,7 +31,7 @@ const float OneFrameMS = 1000.0 / FPS;
 
 void initializeRobot()
 {
-  // Place code here to sinitialize servos to starting positions.
+  // Place code here to initialize servos to starting positions.
 
   if (nAvgBatteryLevel < 8000) {  // brick under 8.0 volts
 	  PlayImmediateTone(1000, 100);  // play a warning tone
@@ -94,8 +93,6 @@ task drive()
 	    motor[armMotor] = armMotorSpeed;
 	    motor[leftMotor] = leftMotorSpeed;
 	    motor[rightMotor] = rightMotorSpeed;
-
-
 
   	  if (joy1Btn(5) == 1) {
   	    // Power up
@@ -164,8 +161,6 @@ task drive()
 		  motor[rightMotor] = 0;
 
 	  }
-
-
   }
 }
 }
