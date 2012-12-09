@@ -23,11 +23,11 @@
 #define SERVO_INITIAL 127   // Replace with the servo's real initial position
 #define SERVO_RATE    1     // Larger = faster.  Be careful to give the servo time to move.
 #define FPS           60.0  // Rate at which loop repeats.  Also will affect speed of servo.
-#define TopHat_UP     0
-#define TopHat_DOWN   4
+#define TOPHAT_UP     0
+#define TOPHAT_DOWN   4
 
 // Variable stores desired position for servo.  This is the value sent to the servo[] array.
-short ServoDestination = SERVO_INITIAL;
+short servoDestination = SERVO_INITIAL;
 
 // Time in milliseconds of one frame.
 const float OneFrameMS = 1000.0 / FPS;
@@ -183,18 +183,18 @@ task main()
       getJoystickSettings(joystick);
 
       // D-pad direction is up?
-      if (joystick.joy1_TopHat == TopHat_UP)
-      { ServoDestination += SERVO_RATE; }
+      if (joystick.joy1_TopHat == TOPHAT_UP)
+      { servoDestination += SERVO_RATE; }
 
       // D-pad direction is down?
-      if (joystick.joy1_TopHat == TopHat_DOWN)
-      { ServoDestination -= SERVO_RATE; }
+      if (joystick.joy1_TopHat == TOPHAT_DOWN)
+      { servoDestination -= SERVO_RATE; }
 
       // Keep servo position values within the range [0, 255].
-      ServoDestination = (ServoDestination > 255) ? 255 : (((ServoDestination < 0) ? 0 : ServoDestination));
+      servoDestination = (servoDestination > 255) ? 255 : (((servoDestination < 0) ? 0 : servoDestination));
 
       // Send destination to servo.
-      servo[Claw] = ServoDestination;
+      servo[Claw] = servoDestination;
 
       // Don't increment variables too quickly.
       wait1Msec(OneFrameMS);
