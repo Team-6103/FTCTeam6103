@@ -21,7 +21,7 @@
 #define NUDGE_POWER           30
 #define NUDGE_DELAY           250
 #define SERVO_INITIAL 127   // Replace with the servo's real initial position
-#define SERVO_RATE    1     // Larger = faster.  Be careful to give the servo time to move.
+#define SERVO_RATE    2     // Larger = faster.  Be careful to give the servo time to move.
 #define FPS           60.0  // Rate at which loop repeats.  Also will affect speed of servo.
 #define TOPHAT_UP     0
 #define TOPHAT_DOWN   4
