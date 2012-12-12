@@ -4,8 +4,8 @@
 #pragma config(Motor,  mtr_S1_C1_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C3_1,     armMotor,      tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     motorG,        tmotorTetrix, openLoop)
-#pragma config(Servo,  srvo_S1_C2_1,    servo1,               tServoNone)
-#pragma config(Servo,  srvo_S1_C2_2,    Claw,                 tServoNone)
+#pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
+#pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_4,    servo4,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_5,    servo5,               tServoNone)
@@ -21,7 +21,7 @@
 #define NUDGE_POWER           30
 #define NUDGE_DELAY           250
 #define SERVO_INITIAL 127   // Replace with the servo's real initial position
-#define SERVO_RATE    1     // Larger = faster.  Be careful to give the servo time to move.
+#define SERVO_RATE    2     // Larger = faster.  Be careful to give the servo time to move.
 #define FPS           60.0  // Rate at which loop repeats.  Also will affect speed of servo.
 #define TOPHAT_UP     0
 #define TOPHAT_DOWN   4
@@ -183,11 +183,11 @@ task main()
       getJoystickSettings(joystick);
 
       // D-pad direction is up?
-      if (joystick.joy1_TopHat == TOPHAT_UP)
+      if (joystick.joy2_TopHat == TOPHAT_UP)
       { servoDestination += SERVO_RATE; }
 
       // D-pad direction is down?
-      if (joystick.joy1_TopHat == TOPHAT_DOWN)
+      if (joystick.joy2_TopHat == TOPHAT_DOWN)
       { servoDestination -= SERVO_RATE; }
 
       // Keep servo position values within the range [0, 255].
