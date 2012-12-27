@@ -1,11 +1,11 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  none)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
-#pragma config(Motor,  mtr_S1_C1_1,      ,             tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C3_1,     armMotor,      tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     rightMotor,    tmotorTetrix, openLoop)
-#pragma config(Servo,  srvo_S1_C2_1,    servo1,               tServoNone)
-#pragma config(Servo,  srvo_S1_C2_2,    Claw,                 tServoStandard)
+#pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
+#pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_4,    servo4,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_5,    servo5,               tServoNone)
@@ -20,11 +20,11 @@
 #define NUDGE_DURATION        100
 #define NUDGE_POWER           30
 #define NUDGE_DELAY           250
-#define SERVO_INITIAL 127   // Replace with the servo's real initial position
-#define SERVO_RATE    2     // Larger = faster.  Be careful to give the servo time to move.
-#define FPS           60.0  // Rate at which loop repeats.  Also will affect speed of servo.
-#define TOPHAT_UP     0
-#define TOPHAT_DOWN   4
+#define SERVO_INITIAL         127
+#define SERVO_RATE            2
+#define FPS                   60.0
+#define TOPHAT_UP             0
+#define TOPHAT_DOWN           4
 
 // Variable stores desired position for servo.  This is the value sent to the servo[] array.
 short servoDestination = SERVO_INITIAL;
@@ -86,18 +86,18 @@ task drive()
 	    // Set your drive motors based on user input
 	    // here.
 
-	    leftMotorSpeed = joystick.joy1_y1 / JOYSTICK_Y1_MAX * topSpeed;
-	    if (abs(leftMotorSpeed) < JOYSTICK_DEAD_ZONE) leftMotorSpeed = 0;
+	    leftMotorSpeed = joystick.joy1_y1 / JOYSTICK_Y1_MAX * topSpeed; // Map the leftMotorSpeed variable to joystick 1_y1
+	    if (abs(leftMotorSpeed) < JOYSTICK_DEAD_ZONE) leftMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
-	    rightMotorSpeed = joystick.joy1_y2 / JOYSTICK_Y1_MAX * topSpeed;
-	    if (abs(rightMotorSpeed) < JOYSTICK_DEAD_ZONE) rightMotorSpeed = 0;
+	    rightMotorSpeed = joystick.joy1_y2 / JOYSTICK_Y1_MAX * topSpeed; // Map the rightMotorSpeed variable to joystick 1_y2
+	    if (abs(rightMotorSpeed) < JOYSTICK_DEAD_ZONE) rightMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
-	    armMotorSpeed = joystick.joy2_y2 / JOYSTICK_Y1_MAX * armTopSpeed;
-	    if (abs(armMotorSpeed) < JOYSTICK_DEAD_ZONE) armMotorSpeed = 0;
+	    armMotorSpeed = joystick.joy2_y2 / JOYSTICK_Y1_MAX * armTopSpeed; // Map the armMotorSpeed variable to joystick 2_y1
+	    if (abs(armMotorSpeed) < JOYSTICK_DEAD_ZONE) armMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
-	    motor[armMotor] = armMotorSpeed;
-	    motor[leftMotor] = leftMotorSpeed;
-	    motor[rightMotor] = rightMotorSpeed;
+	    motor[armMotor] = armMotorSpeed; // Set the motor armMotor speed as armMotorSpeed
+	    motor[leftMotor] = leftMotorSpeed; // Set the motor leftMotor speed as leftMotorSpeed
+	    motor[rightMotor] = rightMotorSpeed; // Set the motor rightMotor speed as rightMotorSpeed
 
   	  if (joy1Btn(5) == 1) {
   	    // Power up
@@ -172,7 +172,7 @@ task drive()
 
 task main()
 {
-  initializeRobot();
+  initializeRobot();   // Initialize The Robot's Servos and Motor's
 
   waitForStart();   // wait for start of tele-op phase
 
@@ -181,6 +181,7 @@ task main()
   while (true)
   {
       getJoystickSettings(joystick);
+      // Gets Joystick Settings
 
       // D-pad direction is up?
       if (joystick.joy1_TopHat == TOPHAT_UP)
