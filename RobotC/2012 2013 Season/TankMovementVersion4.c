@@ -1,7 +1,7 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  none)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
-#pragma config(Motor,  mtr_S1_C1_1,     rightMotor,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C1_2,     armMotor,      tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_1,     armMotor,      tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     rampMotor,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
@@ -19,6 +19,8 @@
 #define JOYSTICK_DEAD_ZONE    10
 #define NUDGE_DURATION        100
 #define NUDGE_POWER           30
+#define RAMP_POWER            100
+#define RAMP_DURATION         100
 #define NUDGE_DELAY           250
 #define SERVO_INITIAL         127
 #define SERVO_RATE            2
@@ -56,9 +58,8 @@ void initializeRobot()
   return;
 }
 
-// Put the main driver control loop in its own task so
-// the driver never loses control of the robot!
-
+// Put the main driver control loop in its own tasks so
+// the drivers never loses control of the robot!
 task drive()
 {
 
@@ -148,17 +149,17 @@ task drive()
 	      motor[rightMotor] = 0;
 	      wait1Msec(NUDGE_DELAY);
 	    }
-	    if (joy2Btn(4) == 1) {
+	    if (joy2Btn(1) == 1) {
 	      // Move Ramp
-	      motor[rampMotor] = NUDGE_POWER;
-	      wait1Msec(NUDGE_DURATION);
+	      motor[rampMotor] = RAMP_POWER;
+	      wait1Msec(RAMP_DURATION);
 	      motor[rampMotor] = 0;
 	      wait1Msec(NUDGE_DELAY);
 	    }
-	    if (joy1Btn(1) == 1) {
+	    if (joy2Btn(2) == 1) {
 	      // Nudge left
-	      motor[rampMotor] = NUDGE_POWER * -1;
-	      wait1Msec(NUDGE_DURATION);
+	      motor[rampMotor] = RAMP_POWER * -1;
+	      wait1Msec(RAMP_DURATION);
 	      motor[rampMotor] = 0;
 	      wait1Msec(NUDGE_DELAY);
 	    }
