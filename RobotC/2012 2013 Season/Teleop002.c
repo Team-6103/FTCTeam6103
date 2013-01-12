@@ -22,7 +22,7 @@
 #define RAMP_POWER            100
 #define RAMP_DURATION         100
 #define NUDGE_DELAY           250
-#define SERVO_INITIAL         255
+#define SERVO_INITIAL         0
 #define SERVO_RATE            2
 #define FPS                   60.0
 #define TOPHAT_UP             0
