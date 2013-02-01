@@ -3,9 +3,9 @@
 #pragma config(Sensor, S2,     IRSeeker,       sensorHiTechnicIRSeeker1200)
 #pragma config(Sensor, S3,     ,               sensorSONAR)
 #pragma config(Motor,  mtr_S1_C1_1,     armMotor,      tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     rampMotor,     tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
@@ -151,24 +151,11 @@ task main()
   	}
    	if (IRValue<IR_BEACON_CENTER){
   		motor[leftMotor]=0;
+
+  		break;
   	}
+
   }
-
-
-/*
-    servo[Claw]=0;
-  	motor[leftMotor]=50;
-  	motor[rightMotor]=50;
-  	wait1Msec(2000);
-  	motor[leftMotor]=0;
-  	motor[rightMotor]=0;
-  	wait1Msec(10);
-  	motor[leftMotor]=50;
-  	wait1Msec(1500);
-  	motor[leftMotor]=0;
-*/
-while (true){
-	nxtDisplayCenteredTextLine(2, "Sensor Value: %d", SensorValue[IRSeeker]);    // Display "Sensor Value: ##"
-  	wait1Msec(100);    // Wait 100 milliseconds to help display correctly.
+  while(true){
   }
 }

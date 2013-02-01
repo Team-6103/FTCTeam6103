@@ -1,7 +1,12 @@
-#pragma config(Hubs,  S1, HTMotor,  HTServo,  none,     none)
-#pragma config(Motor,  mtr_S1_C1_1,     leftMotor,     tmotorNormal, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorNormal, openLoop)
-#pragma config(Servo,  srvo_S1_C2_1,    servo1,               tServoNone)
+#pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  none)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     IRSeeker,       sensorHiTechnicIRSeeker1200)
+#pragma config(Sensor, S3,     ,               sensorSONAR)
+#pragma config(Motor,  mtr_S1_C1_1,     armMotor,      tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_1,     rampMotor,     tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
+#pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_4,    servo4,               tServoNone)
@@ -88,19 +93,20 @@ task main()
 
   waitForStart(); // Wait for the beginning of autonomous phase.
 
-  ///////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////
-  ////                                                   ////
-  ////    Add your robot specific autonomous code here.  ////
-  ////                                                   ////
-  ///////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////
+nMotorEncoder[armMotor] = 0;
+nMotorEncoderTarget[armMotor] = 100;
+motor[armMotor] = 20;
+
+while(nMotorRunState[armMotor]!= runStateIdle){
+
+}
+
+motor[armMotor] = 0;
+
+
 
   while (true)
   {
-
-    motor[leftMotor] = 10;
-    motor[rightMotor] = 10;
 
   }
 }

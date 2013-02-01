@@ -1,8 +1,11 @@
-#pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  none)
+#pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  HTMotor)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     armMotor,      tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C3_1,     rampMotor,     tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C4_1,     teleMotor,     tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C4_2,     motorI,        tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
@@ -70,6 +73,9 @@ task drive()
   int totalMessages = 0;
   int topSpeed = MOTOR_POWER_DOWN_MAX;
   int armTopSpeed = 25;
+  int teleTopSpeed = 20;
+  int teleMotorSpeed = 0;
+
 
   while (true)
   {
@@ -86,18 +92,22 @@ task drive()
 	    // Set your drive motors based on user input
 	    // here.
 
-	    leftMotorSpeed = joystick.joy1_y1 / JOYSTICK_Y1_MAX * topSpeed; // Map the leftMotorSpeed variable to joystick 1_y1
+	    leftMotorSpeed = joystick.joy1_y2 / JOYSTICK_Y1_MAX * topSpeed; // Map the leftMotorSpeed variable to joystick 1_y1
 	    if (abs(leftMotorSpeed) < JOYSTICK_DEAD_ZONE) leftMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
-	    rightMotorSpeed = joystick.joy1_y2 / JOYSTICK_Y1_MAX * topSpeed; // Map the rightMotorSpeed variable to joystick 1_y2
+	    rightMotorSpeed = joystick.joy1_y1 / JOYSTICK_Y1_MAX * topSpeed; // Map the rightMotorSpeed variable to joystick 1_y2
 	    if (abs(rightMotorSpeed) < JOYSTICK_DEAD_ZONE) rightMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
-	    armMotorSpeed = -joystick.joy2_y2  / JOYSTICK_Y1_MAX * armTopSpeed; // Map the armMotorSpeed variable to joystick 2_y1
+	    armMotorSpeed = -joystick.joy2_y2  / JOYSTICK_Y1_MAX * armTopSpeed; // Map the armMotorSpeed variable to joystick 2_y2
 	    if (abs(armMotorSpeed) < JOYSTICK_DEAD_ZONE) armMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
+
+	    teleMotorSpeed = joystick.joy2_y1  / JOYSTICK_Y1_MAX * teleTopSpeed; // Map the teleMotorSpeed variable to joystick 2_y1
+	    if (abs(teleMotorSpeed) < JOYSTICK_DEAD_ZONE) teleMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
 	    motor[armMotor] = armMotorSpeed; // Set the motor armMotor speed as armMotorSpeed
 	    motor[leftMotor] = leftMotorSpeed; // Set the motor leftMotor speed as leftMotorSpeed
 	    motor[rightMotor] = rightMotorSpeed; // Set the motor rightMotor speed as rightMotorSpeed
+	    motor[teleMotor] = teleMotorSpeed;
 
   	  if (joy1Btn(5) == 1) {
   	    // Power up
