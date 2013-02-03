@@ -218,7 +218,7 @@ task main()
       getJoystickSettings(joystick);
       // Gets Joystick Settings
 
-      // D-pad direction is up?
+      //D-pad direction is up?
       if (joystick.joy2_TopHat == TOPHAT_UP)
       { servoDestination += SERVO_RATE; }
 
