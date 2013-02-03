@@ -18,6 +18,8 @@
 #define JOYSTICK_Y1_MIN       0
 #define MOTOR_POWER_UP_MAX    100
 #define MOTOR_POWER_DOWN_MAX  30
+#define ARM_MOTOR_POWER_UP    75
+#define ARM_MOTOR_POWER_DOWN  30
 #define JOYSTICK_DEAD_ZONE    10
 #define NUDGE_DURATION        100
 #define NUDGE_POWER           30
@@ -72,7 +74,7 @@ task drive()
   int armMotorSpeed = 0;
   int totalMessages = 0;
   int topSpeed = MOTOR_POWER_DOWN_MAX;
-  int armTopSpeed = 25;
+  int armTopSpeed = 30;
   int teleTopSpeed = 20;
   int teleMotorSpeed = 0;
 
@@ -117,6 +119,14 @@ task drive()
 	    if (joy1Btn(7) == 1) {
 	      // Power down
 	      topSpeed = MOTOR_POWER_DOWN_MAX;
+	    }
+  	  if (joy2Btn(2) == 1) {
+  	    // Power up
+	      armTopSpeed = ARM_MOTOR_POWER_DOWN;
+	    }
+  	  if (joy1Btn(4) == 1) {
+  	    // Power up
+	      armTopSpeed = ARM_MOTOR_POWER_UP;
 	    }
 
 	    if (joy1Btn(4) == 1) {
