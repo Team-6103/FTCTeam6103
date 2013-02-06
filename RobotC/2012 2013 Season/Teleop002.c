@@ -169,14 +169,14 @@ task drive()
 	      wait1Msec(NUDGE_DELAY);
 	    }
 	    if (joy2Btn(1) == 1) {
-	      // Move Ramp
+	      // Move Ramp Up
 	      motor[rampMotor] = RAMP_POWER;
 	      wait1Msec(RAMP_DURATION);
 	      motor[rampMotor] = 0;
 	      wait1Msec(NUDGE_DELAY);
 	    }
 	    if (joy2Btn(3) == 1) {
-	      // Nudge left
+	      // Move Ramp Down
 	      motor[rampMotor] = RAMP_POWER * -1;
 	      wait1Msec(RAMP_DURATION);
 	      motor[rampMotor] = 0;
