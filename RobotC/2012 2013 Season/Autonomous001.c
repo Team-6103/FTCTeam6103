@@ -3,9 +3,9 @@
 #pragma config(Sensor, S2,     IRSeeker,       sensorHiTechnicIRSeeker1200)
 #pragma config(Sensor, S3,     ,               sensorSONAR)
 #pragma config(Motor,  mtr_S1_C1_1,     armMotor,      tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C3_1,     rampMotor,     tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
@@ -17,8 +17,9 @@
 #define IR_BEACON_LEFT        4
 #define IR_BEACON_CENTER      5
 #define IR_BEACON_RIGHT       6
+#define SERVO_INITIAL         0
 
-
+short servoDestination = SERVO_INITIAL;
 
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
@@ -58,7 +59,8 @@ task main()
   // Position arm and scoop at ir beacon level
 
 
-  // Move forward ~3 feet
+  // Move forward ~3
+  servo[Claw] = servoDestination;
   motor[leftMotor]=30;
   motor[rightMotor]=30;
   wait1Msec(2000);
@@ -139,7 +141,7 @@ task main()
     	motor[leftMotor]=23;
   		motor[rightMotor]=23;
 
-  while (true){
+  while (SensorValue(IRSeeker)>0){
   	IRValue = SensorValue(IRSeeker);
 
   	if (IRValue==IR_BEACON_CENTER){
