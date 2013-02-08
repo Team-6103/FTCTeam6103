@@ -151,8 +151,6 @@ task main()
   	}
    	if (IRValue<IR_BEACON_CENTER){
   		motor[leftMotor]=0;
-
-  		break;
   	}
 
   }
