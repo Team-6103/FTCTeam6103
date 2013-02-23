@@ -18,8 +18,10 @@
 #define IR_BEACON_CENTER      5
 #define IR_BEACON_RIGHT       6
 #define SERVO_INITIAL         0
+#define SERVO_DELIVERY        127
 
 short servoDestination = SERVO_INITIAL;
+short servoDelivery = SERVO_DELIVERY;
 
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
@@ -141,18 +143,30 @@ task main()
     	motor[leftMotor]=23;
   		motor[rightMotor]=23;
 
-  while (SensorValue(IRSeeker)>0){
+  while (true){
   	IRValue = SensorValue(IRSeeker);
+  	nMotorEncoder[armMotor] = 0;
+  	nMotorEncoderTarget[armMotor]=20;
 
   	if (IRValue==IR_BEACON_CENTER){
   		motor[leftMotor]=23;
   		motor[rightMotor]=23;
+  		wait1Msec(5000);
+  		motor[leftMotor]=0;
+  		motor[rightMotor]=0;
+  	}
   	}
    	if (IRValue>IR_BEACON_CENTER){
+  		motor[rightMotor]=0;
+  		wait1Msec(5000);
+  		motor[leftMotor]=0;
   		motor[rightMotor]=0;
   	}
    	if (IRValue<IR_BEACON_CENTER){
   		motor[leftMotor]=0;
+  		wait1Msec(5000);
+  		motor[leftMotor]=0;
+  		motor[rightMotor]=0;
   	}
 
   }

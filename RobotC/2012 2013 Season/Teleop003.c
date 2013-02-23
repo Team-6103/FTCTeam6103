@@ -72,7 +72,7 @@ task drive()
   int armMotorSpeed = 0;
   int totalMessages = 0;
   int topSpeed = MOTOR_POWER_DOWN_MAX;
-  int armTopSpeed = 20;
+  int armTopSpeed = 25;
   int teleTopSpeed = 20;
   int teleMotorSpeed = 0;
 

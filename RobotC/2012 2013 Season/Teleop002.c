@@ -1,9 +1,9 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  HTMotor)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     armMotor,      tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C1_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C3_1,     rampMotor,     tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     leftMotor,     tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C3_2,     rightMotor,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C4_1,     teleMotor,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C4_2,     motorI,        tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C2_1,    Claw,                 tServoStandard)
@@ -74,7 +74,7 @@ task drive()
   int armMotorSpeed = 0;
   int totalMessages = 0;
   int topSpeed = MOTOR_POWER_DOWN_MAX;
-  int armTopSpeed = 30;
+  int armTopSpeed = 25;
   int teleTopSpeed = 20;
   int teleMotorSpeed = 0;
 
