@@ -168,8 +168,7 @@ task main()
   		motor[leftMotor]=0;
   		motor[rightMotor]=0;
   	}
+  	  while(true){
+  }
 
   }
-  while(true){
-  }
-}
