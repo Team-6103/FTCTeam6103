@@ -73,6 +73,14 @@ task drive()
 
 	    totalMessages = ntotalMessageCount;
 
+	    if (joy1Btn(0)== 1)
+	    {
+	    	motor[motor1] = motor3Speed;
+	    	motor[motor2] = motor3Speed;
+	    	motor[motor3] = motor3Speed;
+	    	motor[motor4] = motor3Speed;
+	    }
+
 	  } else if (time1[T2] > 200) {
 
 		  PlayImmediateTone(3000, 1);

@@ -36,8 +36,8 @@ task main()
 	waitForStart();
 
 	motor[motor1] = 100;
-	motor[motor3] = 100;
-	wait1Msec(40);
+	motor[motor3] = -100;
+	wait1Msec(1000);
 	motor[motor1] = 0;
 	motor[motor3] = 0;
 
