@@ -36,8 +36,8 @@ task main()
 	waitForStart();
 
 	motor[rightMotor] = 100;
-	motor[leftMotor] = 100;
-	wait1Msec(1000);
+	//motor[leftMotor] = 100;
+	wait1Msec(1800);
 	motor[rightMotor] = 0;
 	motor[leftMotor] = 0;
 
@@ -52,6 +52,5 @@ task main()
 	wait1Msec(1500);
 	motor[rightMotor] = 0;
 	motor[leftMotor] = 0;
-
 
 }

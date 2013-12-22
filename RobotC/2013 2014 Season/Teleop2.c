@@ -30,6 +30,7 @@
 #define TOPHAT_UP             0
 #define TOPHAT_DOWN           4
 
+
 // Variable stores desired position for servo.  This is the value sent to the servo[] array.
 short servoDestination = SERVO_INITIAL;
 
@@ -108,7 +109,8 @@ task drive()
 	    motor[rightMotor] = rightMotorSpeed; // Set the motor rightMotor speed as rightMotorSpeed
 	    motor[scoopMotor] = scoopMotorSpeed;
 
-  	  if (joy1Btn(5) == 1) {
+
+	    if (joy1Btn(5) == 1) {
   	    // Power up
 	      topSpeed = MOTOR_POWER_UP_MAX;
 	    }
@@ -198,7 +200,7 @@ task main()
 
   while (true)
   {
-  	getJoystickSettings(joystick);
+      getJoystickSettings(joystick);
       // Gets Joystick Settings
 
       //D-pad direction is up?
@@ -217,8 +219,6 @@ task main()
 
       // Don't increment variables too quickly.
       wait1Msec(OneFrameMS);
-
-
 
     }
 }

@@ -52,6 +52,4 @@ task main()
 	wait1Msec(1500);
 	motor[rightMotor] = 0;
 	motor[leftMotor] = 0;
-
-
 }
