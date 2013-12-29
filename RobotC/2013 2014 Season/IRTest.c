@@ -43,26 +43,14 @@ task main()
 	initializeRobot();
 
 	//waitForStart();
-	motor[rightMotor] = -100;
-	motor[leftMotor] = -100;
-	wait1Msec(1100);
-	motor[rightMotor] = 0;
-	motor[leftMotor] = 0;
-
-	motor[leftMotor] = 0;
-	motor[rightMotor] = -100;
-	wait1Msec(1200);
-	motor[leftMotor] = 0;
-	motor[rightMotor] = 0;
-
 	while(true){
 
-	motor[leftMotor] = -100;
 	motor[rightMotor] = -100;
+	motor[leftMotor] = -100;
 
 	if(SensorValue[IRseeker2] == 5)
 	{
-		wait1Msec(550);
+		wait1Msec(500);
 
 		motor[leftMotor] = 0;
 		motor[rightMotor] = 0;
