@@ -71,11 +71,11 @@ task drive()
   int leftMotorSpeed = 0;
   int rightMotorSpeed = 0;
   int armMotorSpeed = 0;
-  int specMotorSpeed = 0;
+  //int specMotorSpeed = 0;
   int totalMessages = 0;
   int topSpeed = MOTOR_POWER_DOWN_MAX;
   int armTopSpeed = 65;
-  int specTopSpeed = 20;
+  //int specTopSpeed = 20;
   int scoopTopSpeed = 40;
   int scoopMotorSpeed = 0;
 
@@ -107,14 +107,14 @@ task drive()
 	    scoopMotorSpeed = joystick.joy2_y1  / JOYSTICK_Y1_MAX * scoopTopSpeed; // Map the teleMotorSpeed variable to joystick 2_y1
 	    if (abs(scoopMotorSpeed) < JOYSTICK_DEAD_ZONE) scoopMotorSpeed = 0; // Make sure that the joystick isn't inside dead zone
 
-	    specMotorSpeed = joystick.joy1_x1  / JOYSTICK_Y1_MAX * specTopSpeed; // Map the teleMotorSpeed variable to joystick 2_y1
-	    if (abs(specMotorSpeed) < JOYSTICK_DEAD_ZONE) specMotorSpeed = 0;
+	    //specMotorSpeed = joystick.joy1_x1  / JOYSTICK_Y1_MAX * specTopSpeed; // Map the teleMotorSpeed variable to joystick 2_y1
+	    //if (abs(specMotorSpeed) < JOYSTICK_DEAD_ZONE) specMotorSpeed = 0;
 
 	    motor[armMotor] = armMotorSpeed; // Set the motor armMotor speed as armMotorSpeed
 	    motor[leftMotor] = leftMotorSpeed; // Set the motor leftMotor speed as leftMotorSpeed
 	    motor[rightMotor] = rightMotorSpeed; // Set the motor rightMotor speed as rightMotorSpeed
 	    motor[scoopMotor] = scoopMotorSpeed;
-	    motor[specMotor] = specMotorSpeed;
+	    //motor[specMotor] = specMotorSpeed;
 
   	  if (joy1Btn(5) == 1) {
   	    // Power up

@@ -41,28 +41,32 @@ void initializeRobot()
 task main()
 {
 	initializeRobot();
+	bool BeaconFound = false;
+	int waittime = 550;
 
 	//waitForStart();
 	motor[rightMotor] = -100;
 	motor[leftMotor] = -100;
-	wait1Msec(1100);
+	wait1Msec(1000);
 	motor[rightMotor] = 0;
 	motor[leftMotor] = 0;
 
 	motor[leftMotor] = 0;
 	motor[rightMotor] = -100;
-	wait1Msec(1200);
+	wait1Msec(1100);
 	motor[leftMotor] = 0;
 	motor[rightMotor] = 0;
 
-	while(true){
+	ClearTimer(T1);
+	while(time1[T1] <= 4000){
 
 	motor[leftMotor] = -100;
 	motor[rightMotor] = -100;
 
 	if(SensorValue[IRseeker2] == 5)
 	{
-		wait1Msec(550);
+		ClearTimer(T2);
+		wait1Msec(waittime);
 
 		motor[leftMotor] = 0;
 		motor[rightMotor] = 0;
@@ -74,7 +78,23 @@ task main()
 		motor[specMotor] = 20;
 		wait1Msec(1000);
 		motor[specMotor] = 0;
-		wait1Msec(500000000000000000000000);
-}
+		BeaconFound = true;
+
+		if(time1[T2] < 2400)
+		{
+			motor[rightMotor] = -100;
+			motor[leftMotor] = -100;
+			wait1Msec(1000);
+			motor[rightMotor] = 0;
+			motor[leftMotor] = 0;
+		}else{
+			wait1Msec(5000000000000000000000000000000);
+		}
+
+		if(time1[T2] > 2400 && BeaconFound == false)
+		{
+			waittime = .750;
+		}
+	}
 }
 }
