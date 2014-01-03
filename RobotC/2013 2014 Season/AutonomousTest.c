@@ -45,7 +45,8 @@ task main()
 	int waittime = 550;
 
 	//waitForStart();
-	motor[rightMotor] = -100;
+		ClearTimer(T1);
+		motor[rightMotor] = -100;
 	motor[leftMotor] = -100;
 	wait1Msec(1000);
 	motor[rightMotor] = 0;
@@ -53,48 +54,48 @@ task main()
 
 	motor[leftMotor] = 0;
 	motor[rightMotor] = -100;
-	wait1Msec(1100);
+	wait1Msec(1150);
 	motor[leftMotor] = 0;
 	motor[rightMotor] = 0;
+			ClearTimer(T2);
 
-	ClearTimer(T1);
-	while(time1[T1] <= 4000){
 
-	motor[leftMotor] = -100;
-	motor[rightMotor] = -100;
+	while(time1[T1] <= 6900){
 
-	if(SensorValue[IRseeker2] == 5)
-	{
-		ClearTimer(T2);
-		wait1Msec(waittime);
+		motor[leftMotor] = -100;
+		motor[rightMotor] = -100;
 
-		motor[leftMotor] = 0;
-		motor[rightMotor] = 0;
 
-		motor[specMotor] = -20;
-		wait1Msec(1000);
-		motor[specMotor] = 0;
-		wait1Msec(100);
-		motor[specMotor] = 20;
-		wait1Msec(1000);
-		motor[specMotor] = 0;
-		BeaconFound = true;
-
-		if(time1[T2] < 2400)
+		if(SensorValue[IRseeker2] == 5)
 		{
-			motor[rightMotor] = -100;
-			motor[leftMotor] = -100;
-			wait1Msec(1000);
-			motor[rightMotor] = 0;
+			if(time1[T2] > 2200 && BeaconFound == false)
+			{
+				waittime = 750;
+			}
+			wait1Msec(waittime);
+
 			motor[leftMotor] = 0;
-		}else{
-			wait1Msec(5000000000000000000000000000000);
-		}
+			motor[rightMotor] = 0;
 
-		if(time1[T2] > 2400 && BeaconFound == false)
-		{
-			waittime = .750;
+			motor[specMotor] = -20;
+			wait1Msec(1000);
+			motor[specMotor] = 0;
+			wait1Msec(100);
+			motor[specMotor] = 20;
+			wait1Msec(1000);
+			motor[specMotor] = 0;
+			BeaconFound = true;
+
+			if(time1[T2] < 6000)
+			{
+				motor[rightMotor] = -100;
+				motor[leftMotor] = -100;
+				wait1Msec(1000);
+				motor[rightMotor] = 0;
+				motor[leftMotor] = 0;
+			}else{
+				wait1Msec(5000000000000000000000000000000);
+			}
 		}
 	}
-}
 }
